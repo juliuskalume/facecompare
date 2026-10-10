@@ -62,6 +62,8 @@ Open:
 http://127.0.0.1:8010
 ```
 
+Logs are written to `logs/` when using `run_janus.ps1`. Check `logs/janus-latest.txt` to find the newest run log.
+
 ## Configuration
 
 Defaults:
