@@ -4,11 +4,7 @@ Janus is a local face-comparison app. Upload two face photos, choose the detecte
 
 Photos are processed in memory and are not stored.
 
-Try it directly:
-
-```text
-https://janus.sentirax.com
-```
+Try it directly: [janus.sentirax.com](https://janus.sentirax.com)
 
 ## Features
 
