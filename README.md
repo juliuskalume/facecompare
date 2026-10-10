@@ -20,6 +20,8 @@ Photos are processed in memory and are not stored.
 
 ## Install
 
+PowerShell:
+
 ```powershell
 git clone https://github.com/juliuskalume/facecompare.git
 cd facecompare
@@ -28,10 +30,28 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\pip.exe install -r requirements.txt
 ```
 
+Bash:
+
+```bash
+git clone https://github.com/juliuskalume/facecompare.git
+cd facecompare
+python3.11 -m venv .venv
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/pip install -r requirements.txt
+```
+
 ## Run
+
+PowerShell:
 
 ```powershell
 .\run_janus.ps1
+```
+
+Bash:
+
+```bash
+./.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
 ```
 
 Open:
@@ -50,11 +70,22 @@ Defaults:
 
 Optional environment variables:
 
+PowerShell:
+
 ```powershell
 $env:JANUS_MODEL="buffalo_l"
 $env:JANUS_MATCH_THRESHOLD="0.5"
 $env:JANUS_SCORE_STEEPNESS="18.0"
 $env:JANUS_DEVICE="cpu"
+```
+
+Bash:
+
+```bash
+export JANUS_MODEL="buffalo_l"
+export JANUS_MATCH_THRESHOLD="0.5"
+export JANUS_SCORE_STEEPNESS="18.0"
+export JANUS_DEVICE="cpu"
 ```
 
 Use `JANUS_DEVICE=cuda` only when the InsightFace ONNX Runtime CUDA provider is installed.
