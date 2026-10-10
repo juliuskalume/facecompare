@@ -4,7 +4,31 @@ Janus is a local face-comparison app. Upload two face photos, choose the detecte
 
 Photos are processed in memory and are not stored.
 
-## Run locally
+## Features
+
+- Two-image face comparison
+- Multiple-face selection per image
+- Face-focused previews
+- Cosine similarity scoring
+- English and Turkish UI
+- Local web UI and FastAPI endpoints
+
+## Requirements
+
+- Python 3.11
+- Microsoft C++ Build Tools on Windows
+
+## Install
+
+```powershell
+git clone https://github.com/juliuskalume/facecompare.git
+cd facecompare
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\pip.exe install -r requirements.txt
+```
+
+## Run
 
 ```powershell
 .\run_janus.ps1
@@ -16,42 +40,37 @@ Open:
 http://127.0.0.1:8010
 ```
 
-## Manual install
-
-```powershell
-pip install -r requirements.txt
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
-```
-
-## Public tunnel
-
-This project can be exposed from the local PC with Cloudflare Tunnel. The current same-origin frontend setup expects the app and API to share one domain, for example:
-
-```text
-https://janus.sentirax.com
-```
-
-The local backend serves both:
-
-- UI at `/`
-- Health check at `/api/health`
-- Detection at `/api/detect`
-- Comparison at `/api/compare`
-
-## Settings
+## Configuration
 
 Defaults:
 
-- `JANUS_MODEL=buffalo_l`
-- `JANUS_MATCH_THRESHOLD=0.5`
-- face detection confidence threshold: `0.70`
+- Model: `buffalo_l`
+- Match threshold: `0.5`
+- Face detection threshold: `0.70`
 
 Optional environment variables:
 
 ```powershell
+$env:JANUS_MODEL="buffalo_l"
 $env:JANUS_MATCH_THRESHOLD="0.5"
 $env:JANUS_SCORE_STEEPNESS="18.0"
 $env:JANUS_DEVICE="cpu"
 ```
 
 Use `JANUS_DEVICE=cuda` only when the InsightFace ONNX Runtime CUDA provider is installed.
+
+## API
+
+```text
+GET  /api/health
+POST /api/detect
+POST /api/compare
+```
+
+`POST /api/compare` accepts multipart form fields:
+
+- `left`: first image
+- `right`: second image
+- `left_index`: selected detected face index, default `0`
+- `right_index`: selected detected face index, default `0`
+- `lang`: `en` or `tr`, default `en`
